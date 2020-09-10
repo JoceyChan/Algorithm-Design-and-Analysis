@@ -3,7 +3,11 @@
 #include <fstream>
 #include <vector>
 using namespace std;
-
+// Resources I used: 
+//http://www.cplusplus.com/doc/tutorial/basic_io/
+//http://www.cplusplus.com/doc/tutorial/files/
+//https://wwwx.cs.unc.edu/~sparkst/howto/cpp_main.php
+// and book/Lecture
 void insertionSorted(int n, int* arr){
     for(int j = 1; j < n; j++){
         int key = arr[j];
@@ -21,9 +25,10 @@ void insertionSorted(int n, int* arr){
 
 int main() {
     int n;
-    cin >> n;
+    std::cin >> n;
     // cout << n;
-    int* arr = new int[n];
+    int* arr;
+    arr = new int[n];
     // cin >> arr;
     // cout << arr;
     // std::cout << "1" << ";";
