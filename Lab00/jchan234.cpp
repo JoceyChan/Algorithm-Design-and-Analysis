@@ -3,12 +3,13 @@
 #include <fstream>
 #include <vector>
 using namespace std;
-// Resources I used: 
-//http://www.cplusplus.com/doc/tutorial/basic_io/
-//http://www.cplusplus.com/doc/tutorial/files/
-//https://wwwx.cs.unc.edu/~sparkst/howto/cpp_main.php
-// and book/Lecture
-void insertionSorted(int n, int* arr){
+// Resources I used to know how to retrieve n and the arr: 
+// http://www.cplusplus.com/doc/tutorial/basic_io/
+// http://www.cplusplus.com/doc/tutorial/files/
+// https://wwwx.cs.unc.edu/~sparkst/howto/cpp_main.php
+// and book/Lecture/TA, I used the book and lecture to understand how Insertion functions 
+// Got help from peer Betsy to understand that we do not have to open the testfiles in our .cpp file
+void insertionSortedFn(int n, int* arr){ 
     for(int j = 1; j < n; j++){
         int key = arr[j];
         int i = j - 1; 
@@ -31,10 +32,10 @@ int main() {
     arr = new int[n];
     // cin >> arr;
     // cout << arr;
-    // std::cout << "1" << ";";
+    // std::cout << "1" << ";"; // checking point
     for(int i = 0; i < n; i++){
         std::cin >> arr[i];
     }
-    insertionSorted(n, arr);
+    insertionSortedFn(n, arr);
 
 }
