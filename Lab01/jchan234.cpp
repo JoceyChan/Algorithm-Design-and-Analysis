@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <iostream>
-
+//Resources used: Lecture/Book/Lab Session
 using namespace std;
 int linearSearchFn(int nSize, int aOfS, int* array){
     for(int i = 0; i < nSize; i++){
