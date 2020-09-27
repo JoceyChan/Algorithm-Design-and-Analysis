@@ -5,24 +5,8 @@
 //Resources used: Lecture/Book/Lab Session
 using namespace std;
 
-void mergeFn(int* array, int p, int middle, int r){
-  
-    int n1 = middle - p + 1;
-    int n2 = r - middle;
-    int Left[n1];
-    int Right[n2];
-   
-    for(int j = 0; j < n2; j++){
-        Right[j] = array[middle + 1 + j];
-    }
-    for(int i = 0; i < n1; i++){
-        Left[i] = array[p + i];
-    }
-
-    int i = 0;
-    int j = 0;
-    int k = p;
-   while (i < n1 && j < n2){
+void mergeHelper(int i, int j, int k, int n1, int n2, int* array, int* Left, int* Right){
+    while (i < n1 && j < n2){
         if(Left[i] <= Right[j]){
             array[k] = Left[i];
             i++;
@@ -43,8 +27,25 @@ void mergeFn(int* array, int p, int middle, int r){
         j++;
         k++;
     }
+}
+void mergeFn(int* array, int p, int middle, int r){
+  
+    int n1 = middle - p + 1;
+    int n2 = r - middle;
+    int Left[n1];
+    int Right[n2];
    
-
+    for(int j = 0; j < n2; j++){
+        Right[j] = array[middle + 1 + j];
+    }
+    for(int i = 0; i < n1; i++){
+        Left[i] = array[p + i];
+    }
+    
+    int i = 0;
+    int j = 0;
+    int k = p;
+    mergeHelper(i, j, k, n1, n2, array, Left, Right);
 }
 void mergeSortFn(int* array, int p, int r){
     if(p < r){
