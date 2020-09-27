@@ -5,47 +5,47 @@
 //Resources used: Lecture/Book/Lab Session
 using namespace std;
 
-void mergeHelper(int i, int j, int k, int n1, int n2, int* array, int* Left, int* Right){
-    while (i < n1 && j < n2){
-        if(Left[i] <= Right[j]){
-            array[k] = Left[i];
-            i++;
+void mergeHelper(int a, int b, int c, int n1, int n2, int* array, int* left, int* right){
+    while (a < n1 && b < n2){
+        if(left[a] <= right[b]){
+            array[c] = left[a];
+            a++;
         }
         else{
-            array[k] = Right[j];
-            j++;
+            array[c] = right[b];
+            b++;
         }
-        k++;
+        c++;
     }
-    while (i < n1){
-        array[k] = Left[i];
-        i++;
-        k++;
+    while (a < n1){
+        array[c] = left[a];
+        a++;
+        c++;
     }
-    while(j < n2){
-        array[k] = Right[j];
-        j++;
-        k++;
+    while(b < n2){
+        array[c] = right[b];
+        b++;
+        c++;
     }
 }
 void mergeFn(int* array, int p, int middle, int r){
   
     int n1 = middle - p + 1;
     int n2 = r - middle;
-    int Left[n1];
-    int Right[n2];
+    int left[n1];
+    int right[n2];
    
     for(int j = 0; j < n2; j++){
-        Right[j] = array[middle + 1 + j];
+        right[j] = array[middle + 1 + j];
     }
     for(int i = 0; i < n1; i++){
-        Left[i] = array[p + i];
+        left[i] = array[p + i];
     }
     
-    int i = 0;
-    int j = 0;
-    int k = p;
-    mergeHelper(i, j, k, n1, n2, array, Left, Right);
+    int a = 0;
+    int b = 0;
+    int c = p;
+    mergeHelper(a, b, c, n1, n2, array, left, right);
 }
 void mergeSortFn(int* array, int p, int r){
     if(p < r){
@@ -62,7 +62,6 @@ int main(){
     array = new int[arrayLength];
     int p = 0;
     int r = arrayLength;
-
 
     for(int i = 0; i < arrayLength; i++){
         std::cin >> array[i];
