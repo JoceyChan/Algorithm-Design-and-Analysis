@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <iostream>
 
-//Resources used: Lecture/Book/Lab Session
+//Resources used: Lecture/Book/Lab Session/peer: Alberto V. - helped explain the process of merge sort 
 using namespace std;
 
 void mergeHelper(int a, int b, int c, int n1, int n2, int* array, int* left, int* right){
