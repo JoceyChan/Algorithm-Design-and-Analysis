@@ -15,11 +15,11 @@ int max_crossing(int* array, int low, int mid, int high){
         }
     }
     int right_sum = INT_MIN;
-    int sum = 0; 
+    int sum2 = 0; 
     for(int j = mid + 1; j < high + 1; ++j){
-        sum += array[j];
-        if(sum > right_sum){
-            right_sum = sum;
+        sum2 += array[j];
+        if(sum2 > right_sum){
+            right_sum = sum2;
             int maxRight = j;
         }
     }
@@ -35,14 +35,14 @@ int max_subarray(int* array, int low, int high){
     int left_sum = max_subarray(array, low, mid);
     int right_sum = max_subarray(array, mid+1, high);
     int cross_sum = max_crossing(array, low, mid, high);
-    if(left_sum >= right_sum && left_sum >= max_crossing){
+    if(left_sum >= right_sum && left_sum >= cross_sum){
         return left_sum;
     }
-    else if(left_sum <= right_sum && max_crossing <= right_sum){
+    else if(left_sum <= right_sum && cross_sum <= right_sum){
         return right_sum;
     }
     else{
-        return max_crossing;
+        return cross_sum;
     }
     //finish..
 }
