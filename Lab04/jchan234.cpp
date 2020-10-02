@@ -49,7 +49,8 @@ int maxSubarray(int* array, int low, int high){
     int sumL = (low + high);
     int mid = sumL /2;
     int leftSum = maxSubarray(array, low, mid);
-    int rightSum = maxSubarray(array, mid+1, high);
+    int sumMid = mid+1;
+    int rightSum = maxSubarray(array, sumMid, high);
     int crossSum = maxCrossingFn(array, low, mid, high);
     
     
