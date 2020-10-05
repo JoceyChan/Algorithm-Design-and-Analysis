@@ -2,52 +2,51 @@
 #include <iostream>
 //Resources used: Lecture/Book/Lab Session
 using namespace std;
+void maxHeapify(int* array, int heapSize, int i){ 
+    int largest = i;
+    int left = 2 * i + 1;
+    int right =  2 * i + 2;
 
-void max_heapify(int* a, int i, int heapSize){
-    int l = 2 * i;
-    int r = 2 * i + 1;
-    int largest = 0;
-    if(l <= heapSize && a[1] > a[i]){
-        largest = l;
-
+    if(left < heapSize && array[left] > array[largest]){
+        largest = left;
     }
-    else{
-        largest = i;
+    if(right < heapSize && array[right] > array[largest]){
+        largest = right;
     }
     if(largest != i){
-        swap(a[i], a[largest]);
-        max_heapify(a, largest, heapSize);
+        swap(array[i], array[largest]);
+        maxHeapify(array, heapSize, largest);
+    }
+
+}
+// void buildHeap(int* array, int heapSize){
+//     for(int i = heapSize/2; i >= 1; i--){
+//         maxHeapify(array, heapSize, i);
+//     }
+// }
+void heapSort(int* array, int heapSize){
+    // buildHeap(array, heapSize);
+    for(int i = heapSize/2-1; i >= 0; i--){
+        maxHeapify(array, heapSize, i);
+    }
+    for(int i = heapSize-1; i >= 0; i--){
+        swap(array[0], array[i]);
+        maxHeapify(array, i, 0);
     }
 }
-
-void buildHeap(int* a, int n){
-    int heapSize = n;
-    //finsih
-}
-
-void heapsort(int* a, int n){
-    buildHeap(a, n);
-    int heapSize = n;
-    for(int i = n; i > 1; i--){
-        int temp = a[i];
-        a[i] = a[1];
-        a[1] = temp;
-        heapSize--;
-        max_heapify(a, 1, heapSize);
-    }
-}
-
 int main(){
-    int n = 0;
-    std::cin >> n;
+    int heapSize;
+    std::cin >> heapSize;
     int* array;
-    array = new int[n+1];
-    for(int i = 1; i <= n; i++){
+    array = new int[heapSize+1];
+
+    for(int i = 0; i < heapSize; i++){
         std::cin >> array[i];
     }
-    heapsort(array, n);
+    heapSort(array, heapSize);
 
-    for(int i = 1; i <= n; i++){
-        std::cout << array[i] << ";";
+    for(int i = 0; i < heapSize; ++i){
+        std:cout << array[i] << ";";
     }
+    return 0;
 }
