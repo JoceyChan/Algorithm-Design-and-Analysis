@@ -44,15 +44,15 @@ tests=($(printf '%d\n' ${tests[@]} | sort -n))
 
 # Apply a.exe to each test file and count how many are correct.
 correct=0;
-./a.exe < ./testfiles/t1 > ./testfiles/to1
-# for i in ${tests[@]}; do
-#   ./a.exe < ./testfiles/t$i | diff -q ./testfiles/o$i - > /dev/null
-#   if [ "$?" -eq 0 ] ; then # if exit code is 0 then correct
-#     echo "Test $i: correct."
-#     ((correct=correct+1))
-#   else
-#     echo "Test $i: INCORRECT."
-#   fi
-# done
-# echo "Total correct: "$correct"/"${#tests[@]};
+# ./a.exe < ./testfiles/t1 > ./testfiles/to1
+for i in ${tests[@]}; do
+  ./a.exe < ./testfiles/t$i | diff -q ./testfiles/o$i - > /dev/null
+  if [ "$?" -eq 0 ] ; then # if exit code is 0 then correct
+    echo "Test $i: correct."
+    ((correct=correct+1))
+  else
+    echo "Test $i: INCORRECT."
+  fi
+done
+echo "Total correct: "$correct"/"${#tests[@]};
 
