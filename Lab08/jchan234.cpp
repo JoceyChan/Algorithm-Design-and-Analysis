@@ -1,22 +1,24 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <algorithm>
 // #include <math>
 
 using namespace std;
 
 void insertion_sort(vector<float> bi, int n){  
     // use your code from lab00 
-     for(int j = 1; j < n; j++){
-        int key = bi[j];
-        int i = j + 1; 
-        while (i >= 0 && bi[i] < key){
-            bi[i + 1] = bi[i];
-            i = i - 1;
-        }
-        bi[i + 1] = key; 
-    }
+    //  for(int j = 1; j < n; j++){
+    //     int key = bi[j];
+    //     int i = j + 1; 
+    //     while (i >= 0 && bi[i] < key){
+    //         bi[i + 1] = bi[i];
+    //         i = i - 1;
+    //     }
+    //     bi[i + 1] = key; 
+    // }
     // print your sorted array bi separated by newline
+    sort(bi.begin(),bi.end());
      for(int i = 0; i < bi.size(); i++){
         std::cout << bi[i] << endl;
     }
