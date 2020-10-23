@@ -3,7 +3,7 @@
 #include <list>
 #include <algorithm>
 // #include <math>
-
+//resorces used Lab session and Book
 using namespace std;
 
 void insertion_sort(vector<float> bi, int n){  
