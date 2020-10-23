@@ -27,7 +27,7 @@ void insertion_sort(vector<float> bi, int n){
 void bucket_sort(float* A, int n){    
     vector<float>* B = new vector<float>[n]; // n empty buckets   
     for(int i = 0; i < n; i++){    // putting element in buckets
-        int f = floor(n * A[i]);    // index bucket
+        int f = (n * A[i]);    // index bucket
         B[f].push_back(A[i]);  
     }  
     for(int i = 0; i < n; i++){  // sorting individual buckets
