@@ -3,10 +3,12 @@
 #include <vector>
 
 using namespace std;
+//collisions when two or more items collide with each other
+// iterators used to point at the memory addresses of  containers
 
 void print_hash_table(list<int>* hash_table, int m){  
     // TODO: print hash table, follow the format
-    list<int> listHash;
+    list<int> listHash; // created a list
     list<int>::iterator iter;
     for(int i = 0; i < m; i++){
         listHash = hash_table[i];
@@ -14,7 +16,7 @@ void print_hash_table(list<int>* hash_table, int m){
             std::cout << i << " : " << endl;
         }
         else{
-            std::cout << i << " : ";
+            std::cout << i << " : "; // prints index
             for(iter = listHash.begin(); iter != listHash.end(); iter++){
                 std::cout << *iter << "->";
             }
@@ -36,24 +38,32 @@ void delete_key(list<int>* hash_table, int key, int m){
     // delete from list: hash_table[idx] 
     list<int>::iterator iter;
     for(iter = hash_table[idx].begin(); iter != hash_table[idx].end(); iter++){
-        if(*iter == key){
-            break;
-            std::cout << key << " : DELETED_FAILED" << endl;
-
-        }
-        if(iter != hash_table[idx].end()){
+         if(iter != hash_table[idx].end()){
             hash_table[idx].erase(iter);
             std::cout << key << " : DELETED" << endl;
-
         }
-        // std::cout << *iter << "->" << ";" << endl;
+        if(*iter == key){
+            std::cout << key << " : DELETED FAILED" << endl;
+            break;
+        }
     }
 }
 void search_key(list<int>* hash_table, int key, int m){  
     int idx = hash_function(key, m);  
     // search inside list: hash_table[idx]
-
-
+    list<int>::iterator iter; 
+    list<int> listH = hash_table[key % m]; 
+    if(listH.empty()){
+        std::cout << key << " : NOT FOUND" << endl;
+    } 
+    else{
+        for(iter = listH.begin(); iter != listH.end(); iter++){
+            if(*iter == key){
+                std::cout << key << " : FOUND AT " << *iter <<"," << key << endl; 
+            }
+        }
+    }
+  
 }
 int main(){  
     int m;  
@@ -64,18 +74,18 @@ int main(){
         std::cin >> c;    
         if(c == 'e'){      
             break;    
-        } else if(c == 'o'){       
+        } else if(c == 'o'){ // output hash table      
             print_hash_table(hash_table, m);    
-        } else if(c == 'i'){       
+        } else if(c == 'i'){  // insert key      
             int key;       
             std::cin >> key;       
             insert_key(hash_table, key, m);    
-        } else if(c == 'd'){       
+        } else if(c == 'd'){ // delete key    
             // finish   
             int key;       
             std::cin >> key;
             delete_key(hash_table, key, m);
-        } else if(c == 's'){
+        } else if(c == 's'){ // search key
             // finish  
             int key;       
             std::cin >> key;
