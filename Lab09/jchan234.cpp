@@ -38,9 +38,13 @@ void delete_key(list<int>* hash_table, int key, int m){
     for(iter = hash_table[idx].begin(); iter != hash_table[idx].end(); iter++){
         if(*iter == key){
             break;
+            std::cout << key << ":DELETED_FAILED;" << endl;
+
         }
         if(iter != hash_table[idx].end()){
             hash_table[idx].erase(iter);
+            std::cout << key << ":DELETED;" << endl;
+
         }
         // std::cout << *iter << "->" << ";" << endl;
     }
@@ -48,7 +52,7 @@ void delete_key(list<int>* hash_table, int key, int m){
 void search_key(list<int>* hash_table, int key, int m){  
     int idx = hash_function(key, m);  
     // search inside list: hash_table[idx]
-    
+
 
 }
 int main(){  
