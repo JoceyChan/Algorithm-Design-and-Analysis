@@ -11,15 +11,15 @@ void print_hash_table(list<int>* hash_table, int m){
     for(int i = 0; i < m; i++){
         listHash = hash_table[i];
         if(listHash.empty()){
-            std::cout << i << ":;";
+            std::cout << i << " : " << endl;
         }
         else{
-            std::cout << i << ":";
+            std::cout << i << " : ";
+            for(iter = listHash.begin(); iter != listHash.end(); iter++){
+                std::cout << *iter << "->";
+            }
+        std::cout << " " << endl;
         }
-        for(int j = 0; j < hash_table[i].size(); j++){
-            std::cout << j << "->";
-        }
-        std::cout << endl;
     }
 }
 
@@ -38,12 +38,12 @@ void delete_key(list<int>* hash_table, int key, int m){
     for(iter = hash_table[idx].begin(); iter != hash_table[idx].end(); iter++){
         if(*iter == key){
             break;
-            std::cout << key << ":DELETED_FAILED;" << endl;
+            std::cout << key << " : DELETED_FAILED" << endl;
 
         }
         if(iter != hash_table[idx].end()){
             hash_table[idx].erase(iter);
-            std::cout << key << ":DELETED;" << endl;
+            std::cout << key << " : DELETED" << endl;
 
         }
         // std::cout << *iter << "->" << ";" << endl;
@@ -56,7 +56,7 @@ void search_key(list<int>* hash_table, int key, int m){
 
 }
 int main(){  
-    int m = 0;  
+    int m;  
     std::cin >> m;  
     list<int>* hash_table = new list<int>[m];  
     while(true){    
