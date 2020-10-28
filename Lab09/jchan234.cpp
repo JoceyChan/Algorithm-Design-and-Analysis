@@ -57,7 +57,7 @@ void search_key(list<int>* hash_table, int key, int m){
     // else{
         for(iter = listH.begin(); iter != listH.end(); iter++){
             if(*iter == key){
-                std::cout << key << " : FOUND AT " << *iter <<"," << " " << endl; 
+                std::cout << key << " : FOUND AT " << idx <<"," << *iter << endl; 
                 return;
             }
         }
