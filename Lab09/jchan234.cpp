@@ -2,6 +2,7 @@
 #include <list>
 #include <vector>
 
+// Resources used: Lab Session, Pals
 using namespace std;
 //collisions when two or more items collide with each other
 // iterators used to point at the memory addresses of  containers
@@ -54,7 +55,7 @@ void delete_key(list<int>* hash_table, int key, int m){
             return;
         }
     }
-    std::cout << key << " : DELETED FAILED" << endl;
+    std::cout << key << " : DELETE FAILED" << endl;
     std::cout << "++++++++++++++++++++" << endl;
 }
 void search_key(list<int>* hash_table, int key, int m){  
