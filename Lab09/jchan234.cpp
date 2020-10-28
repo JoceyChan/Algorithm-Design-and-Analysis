@@ -17,12 +17,20 @@ void print_hash_table(list<int>* hash_table, int m){
         }
         else{
             std::cout << i << " : "; // prints index
+            int j = 0;
             for(iter = listHash.begin(); iter != listHash.end(); iter++){
-                std::cout << *iter << "->";
+                std::cout << *iter;
+                if(j < listHash.size() - 1){
+                    std::cout << "->";
+                    j++;
+                }
+
             }
         std::cout << " " << endl;
         }
     }
+    std::cout << "++++++++++++++++++++" << endl;
+
 }
 
 int hash_function(int key, int m){  
@@ -40,11 +48,14 @@ void delete_key(list<int>* hash_table, int key, int m){
     for(iter = hash_table[idx].begin(); iter != hash_table[idx].end(); iter++){
          if(*iter == key){
             hash_table[idx].erase(iter);
+            // std::cout << "++++++++++++++++++++" << endl;
             std::cout << key << " : DELETED" << endl;
+            std::cout << "++++++++++++++++++++" << endl;
             return;
         }
     }
     std::cout << key << " : DELETED FAILED" << endl;
+    std::cout << "++++++++++++++++++++" << endl;
 }
 void search_key(list<int>* hash_table, int key, int m){  
     int idx = hash_function(key, m);  
@@ -55,15 +66,22 @@ void search_key(list<int>* hash_table, int key, int m){
     //     std::cout << key << " : NOT FOUND" << endl;
     // } 
     // else{
-        for(iter = listH.begin(); iter != listH.end(); iter++){
-            if(*iter == key){
-                std::cout << key << " : FOUND AT " << idx <<"," << *iter << endl; 
-                return;
-            }
+    int index = 0;
+    for(iter = listH.begin(); iter != listH.end(); iter++){
+        index++;
+        if(*iter == key){
+            index--;
+            // std::cout << "++++++++++++++++++++" << endl;
+            std::cout << key << " : FOUND AT " << idx <<"," << index << endl;
+            std::cout << "++++++++++++++++++++" << endl;
+            return;
         }
-         std::cout << key << " : NOT FOUND" << endl;
+    }
+    // std::cout << "++++++++++++++++++++" << endl;
+    std::cout << key << " : NOT FOUND" << endl;
+    std::cout << "++++++++++++++++++++" << endl;
+
     // }
-  
 }
 int main(){  
     int m;  
