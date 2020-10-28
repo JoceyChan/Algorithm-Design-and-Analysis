@@ -36,33 +36,33 @@ void insert_key(list<int>* hash_table, int key, int m){
 void delete_key(list<int>* hash_table, int key, int m){  
     int idx = hash_function(key, m);  
     // delete from list: hash_table[idx] 
-    list<int>::iterator iter;
+    list<int>::iterator iter; 
     for(iter = hash_table[idx].begin(); iter != hash_table[idx].end(); iter++){
-         if(iter != hash_table[idx].end()){
+         if(*iter == key){
             hash_table[idx].erase(iter);
             std::cout << key << " : DELETED" << endl;
-        }
-        if(*iter == key){
-            std::cout << key << " : DELETED FAILED" << endl;
-            break;
+            return;
         }
     }
+    std::cout << key << " : DELETED FAILED" << endl;
 }
 void search_key(list<int>* hash_table, int key, int m){  
     int idx = hash_function(key, m);  
     // search inside list: hash_table[idx]
     list<int>::iterator iter; 
     list<int> listH = hash_table[key % m]; 
-    if(listH.empty()){
-        std::cout << key << " : NOT FOUND" << endl;
-    } 
-    else{
+    // if(listH.empty()){
+    //     std::cout << key << " : NOT FOUND" << endl;
+    // } 
+    // else{
         for(iter = listH.begin(); iter != listH.end(); iter++){
             if(*iter == key){
-                std::cout << key << " : FOUND AT " << *iter <<"," << key << endl; 
+                std::cout << key << " : FOUND AT " << *iter <<"," << " " << endl; 
+                return;
             }
         }
-    }
+         std::cout << key << " : NOT FOUND" << endl;
+    // }
   
 }
 int main(){  
