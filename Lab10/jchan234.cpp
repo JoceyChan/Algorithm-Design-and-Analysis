@@ -6,9 +6,6 @@ using namespace std;
 const int m = 13;
 int hashFunction(int key, int i){
     int keyModM = ((key % 13) + (i * (1 + (key % 11))) % 13);
-    // int h1 = key % 13 ;
-    // int h2 = 1 + (key % 11);
-    // int h = (h1 + (i * h2)) % 13;   
     return keyModM;
 }
 void insertion(int hashTable[m], int key){  
