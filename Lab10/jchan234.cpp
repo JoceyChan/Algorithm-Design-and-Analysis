@@ -3,6 +3,8 @@
 
 using namespace std;
 
+//Resources Used: Book, Lab session
+
 const int m = 13;
 int hashFunction(int key, int i){
     int keyModM = ((key % 13) + (i * (1 + (key % 11))) % 13);
