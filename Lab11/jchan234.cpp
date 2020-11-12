@@ -1,89 +1,168 @@
 #include <sstream>
 #include <iostream>
-#include <string>
+// #include <string>
 
 using namespace std;
 
 struct Node {  
     int key;  
-    Node* left;  
     Node* right;  
+    Node* left;  
     Node* parent;
+
+    Node(int key){
+        this->key = key;
+        this->right = NULL;
+        this->left = NULL;
+        this->parent = NULL;
+    }
 };
 class BST{  
-    public:    
-        BST();    
-        Node *root;    
-        void insert(int key){      
-            Node* y;      
-            Node* x = this->root;      
-            while(x != NULL){        
-                y = x;        
-                if(key < x->key){          
-                    x = x->left;        
-                } 
-                else{          
-                    x = x->right;        
-                }      
+public: 
+    Node *root;    
+    BST(){
+        this->root = NULL;
+    }   
+    void insert(Node* z){      
+        Node* y = NULL;      
+        Node* x = this->root;      
+        while(x != NULL){        
+            y = x;        
+            if(z->key < x->key){          
+                x = x->left;        
+            } 
+            else{          
+                x = x->right;        
             }      
-            Node* z;      
-            z->key = key;      
-            z->parent = y;      
-            if(y == NULL){        
-                this->root = z;      
-            } 
-            else if(z->key < y->key){        
-                y->left = z;      
-            } 
-            else{        
-                y->right = z;      
-            }    
-        };      
-        void deleteNode(int key) { 
-             key = key;
-        };
-        void preorder(Node *n){      
-            if(n != NULL){        
-                cout<<n->key<<endl;        
-                this->preorder(n->left);        
-                this->preorder(n->right);      
-            }    
-        };    
-        void inorder(Node *n){    
-
-        };  
-        void postorder(Node *n){    
-
-        };
-};
-int main() {  
-    char inp[100];  
-    BST tree;  
-    cin.getline(inp, 100);  
-    while(true){    
-        string s(inp);
-        if(s[0] == 'e'){      
-            break;
-            while(true){    
-                string s(inp);    
-                if(s[0] == 'e'){      
-                    break;    
-                } else if(s.substr(0,3) == "pre"){      
-                    tree.preorder(tree.root);      
-                    cout<<"++++++++++++";    
-                } else if(s.substr(0,2) == "in"){    
-
-                } else if(s.substr(0,4) == "post"){    
-
-                } else if(s[0] == 'i'){      
-                    int key = stoi(s.substr(2,s.length()-2));      
-                    tree.insert(key);    
-                } else if(s[0] == 'd'){      
-                    int key = stoi(s.substr(2,s.length()-2));    
-                }    
-                cin.getline(inp, 100);  
+        }      
+        z->parent = y;      
+        if(y == NULL){        
+            root = z;      
+        } 
+        else if(z->key < y->key){        
+            y->left = z;      
+        } 
+        else{        
+            y->right = z;      
+        }
+    } 
+    void transplant(Node *u, Node *v) { 
+        if(u->parent == NULL){
+            this->root = v;
+        } 
+        else if(u == u->parent->left){
+            u->parent->left = v;
+        }
+        else{
+            u->parent->right = v;
+        }
+        if(v != NULL){
+            v->parent = u->parent;
+        }
+    }   
+    Node* treeMinimum(Node *n){
+        while(n->left != NULL){
+            n = n->left;
+        }
+        return n;
+    }
+    Node* search(Node* j){
+        Node* n = root;
+        while(n != NULL && j->key != n->key){
+            if(j->key < n->key){
+                n = n->left;
             }
-            return 0;
+            else{
+                n = n->right;
+            }
+        }
+        return n;
+    }
+    void deleteNode(Node* z) {
+        z = search(z);
+        if(z == NULL){
+            return;
+        }
+        else{
+            if(z->left == NULL){
+                transplant(z, z->right);
+            }
+            else if(z->right == NULL){
+                transplant(z, z->left);
+            }
+            else{
+                Node* y;
+                y = treeMinimum(z->right);
+                if(y->parent != z){
+                    transplant(y, y->right);
+                    y->right = z->right;
+                    y->right->parent = y; 
+                }
+                else{
+                    transplant(z, y);
+                    y->left = z->left;
+                    y->left->parent = y;
+                }
+            }
         }
     }
+    void preorder(Node *n){      
+        if(n != NULL){        
+            cout<<n->key<<endl;        
+            this->preorder(n->left);        
+            this->preorder(n->right);      
+        }    
+    }    
+    void inorder(Node *n){    
+        if(n != NULL){
+            this->inorder(n->left);
+            cout << n->key <<endl;
+            this->inorder(n->right);
+        }
+    }  
+    void postorder(Node *n){ 
+        if(n != NULL){
+            this->postorder(n->left);
+            this->postorder(n->right);
+            cout << n->key << endl;
+        }
+    }
+};
+int main() {  
+    // char inp[100];  
+    BST* tree = new BST(); 
+    string s; 
+    int inp;
+    // cin.getline(inp, 100);  
+    while(true){
+        cin >> s;    
+        // string s(inp);
+        if(s == "e"){      
+            break;
+        } else if(s == "pre"){      
+            tree->preorder(tree->root);      
+            std::cout << "++++++++++++++++++++"; 
+            std::cout << endl;   
+        } else if(s == "in"){    
+            tree->inorder(tree->root);      
+            std::cout << "++++++++++++++++++++"; 
+            std::cout << endl;   
+        } else if(s == "post"){    
+            tree->postorder(tree->root);      
+            std::cout << "++++++++++++++++++++";  
+            std::cout << endl;  
+        } else if(s == "i"){ 
+            cin >> inp; 
+            Node* key;
+            key = new Node(inp);    
+            tree->insert(key);    
+        } else if(s == "d"){ 
+            cin >> inp;     
+            Node* key;
+            key = new Node(inp);
+            tree->deleteNode(key);   
+        }    
+        // cin.getline(inp, 100);  
+    }
+    return 0;
 };
