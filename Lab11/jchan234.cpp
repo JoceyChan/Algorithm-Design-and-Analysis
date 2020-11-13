@@ -1,6 +1,7 @@
 #include <sstream>
 #include <iostream>
 // #include <string>
+//resources used Textbook, lab session
 
 using namespace std;
 
@@ -12,9 +13,9 @@ struct Node {
 
     Node(int key){
         this->key = key;
+        this->parent = NULL;
         this->right = NULL;
         this->left = NULL;
-        this->parent = NULL;
     }
 };
 class BST{  
@@ -23,7 +24,7 @@ public:
     BST(){
         this->root = NULL;
     }   
-    void insert(Node* z){      
+    void insert(Node* z) { //pseudocode page 294      
         Node* y = NULL;      
         Node* x = this->root;      
         while(x != NULL){        
@@ -46,7 +47,7 @@ public:
             y->right = z;      
         }
     } 
-    void transplant(Node *u, Node *v) { 
+    void transplant(Node *u, Node *v) { //pseudocode page 296
         if(u->parent == NULL){
             this->root = v;
         } 
@@ -60,25 +61,25 @@ public:
             v->parent = u->parent;
         }
     }   
-    Node* treeMinimum(Node *n){
+    Node* treeMinimum(Node *n) { //pseudocode page 291
         while(n->left != NULL){
             n = n->left;
         }
         return n;
     }
-    Node* search(Node* j){
-        Node* n = root;
-        while(n != NULL && j->key != n->key){
-            if(j->key < n->key){
-                n = n->left;
+    Node* search(Node* k){ //pseduo code page 291
+        Node* x = root;
+        while(x != NULL && k->key != x->key){
+            if(k->key < x->key){
+                x = x->left;
             }
             else{
-                n = n->right;
+                x = x->right;
             }
         }
-        return n;
+        return x;
     }
-    void deleteNode(Node* z) {
+    void deleteNode(Node* z) { //pseudocode page 298
         z = search(z);
         if(z == NULL){
             return;
@@ -108,23 +109,26 @@ public:
     }
     void preorder(Node *n){      
         if(n != NULL){        
-            cout<<n->key<<endl;        
+            std::cout << n->key;
+            std::cout << endl;        
             this->preorder(n->left);        
             this->preorder(n->right);      
         }    
     }    
-    void inorder(Node *n){    
+    void inOrderTreeWalk(Node *n) {  //pseudocode page 288
         if(n != NULL){
-            this->inorder(n->left);
-            cout << n->key <<endl;
-            this->inorder(n->right);
+            this->inOrderTreeWalk(n->left);
+            std::cout << n->key;
+            std::cout << endl;
+            this->inOrderTreeWalk(n->right);
         }
     }  
     void postorder(Node *n){ 
         if(n != NULL){
             this->postorder(n->left);
             this->postorder(n->right);
-            cout << n->key << endl;
+            std::cout << n->key;
+            std::cout << endl;
         }
     }
 };
@@ -144,7 +148,7 @@ int main() {
             std::cout << "++++++++++++++++++++"; 
             std::cout << endl;   
         } else if(s == "in"){    
-            tree->inorder(tree->root);      
+            tree->inOrderTreeWalk(tree->root);      
             std::cout << "++++++++++++++++++++"; 
             std::cout << endl;   
         } else if(s == "post"){    
