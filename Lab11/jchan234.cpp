@@ -135,8 +135,8 @@ public:
 int main() {  
     // char inp[100];  
     BST* tree = new BST(); 
-    string s; 
     int inp;
+    string s; 
     // cin.getline(inp, 100);  
     while(true){
         cin >> s;    
@@ -156,12 +156,12 @@ int main() {
             std::cout << "++++++++++++++++++++";  
             std::cout << endl;  
         } else if(s == "i"){ 
-            cin >> inp; 
+            std::cin >> inp; 
             Node* key;
             key = new Node(inp);    
             tree->insert(key);    
         } else if(s == "d"){ 
-            cin >> inp;     
+            std::cin >> inp;     
             Node* key;
             key = new Node(inp);
             tree->deleteNode(key);   
@@ -169,4 +169,5 @@ int main() {
         // cin.getline(inp, 100);  
     }
     return 0;
+    //this used to access another function within the class
 };
