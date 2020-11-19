@@ -1,46 +1,47 @@
-#include<iostream>
-#include<climits>
+#include <iostream>
+#include <limits.h>
 
-//resources used Textbook
+// Resourced Used: Lab session, Book
 
 using namespace std;
 
-void bottomUpCutRod(int *p, int n){
-    int len = n + 1;
-    int r[len];
-    int s[len];
-    r[0] = 0;
-
-    int j, i;
-    for(j = 1; j <= n; j++){
-        int q = INT_MIN;
-        for(i = 1; i <= j; i++) {
-            if(q < p[i - 1] + r[j - i]){
-                q = p[i - 1] + r[j - i];
-                s[j] = i;
-            }
-        }
-        r[j] = q;
+int cut_rod(int *p, int n, int* r, int *s){  
+    if(n == 0) {
+        return 0;
     }
-    std::cout << r[n];
-    std::cout << endl;
+    if(r[n] >= 0) {
+        return r[n];  
+    }
+    int q = INT_MIN;  
+    for(int i = 1; i <= n; i++){    
+        int ri = p[i] + cut_rod(p, n - i, r, s);    
+        if (ri > q){      
+            q = ri;      
+            s[n] = i;    
+        }  
+    }  
+    r[n] = q; 
+    return q;
+}
+int main() {  
+    int n;  
+    cin>>n;  
+    int* p = new int[n+1];  
+    int* r = new int[n+1];  
+    int* s = new int[n+1];  
+    for(int i=1; i <= n; i++){   
+        cin>>p[i];    
+        r[i] = INT_MIN;    
+        s[i] = INT_MIN;  
+    }  
+    cout<<cut_rod(p, n, r, s)<<endl;    
+    // while loop to print array s; 
     while(n > 0){
         std::cout << s[n];
         std::cout << " ";
         n -= s[n];
-    }
-}
-// void memoizedCutRod(){
-
-// }
-int main(){
-    int n;
-    std::cin >> n;
-    int p[n];
-
-    for(int i = 0; i < n; i++){
-        std::cin >> p[i];
-    }
-    bottomUpCutRod(p, n);
+    }  
     std::cout << "-1\n";
+
+    return 0;
 }
