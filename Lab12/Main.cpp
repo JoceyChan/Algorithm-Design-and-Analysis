@@ -1,39 +1,43 @@
-// #include<bits/stdc++.h>
 #include<iostream>
+#include<climits>
+
+//resources used Textbook
 
 using namespace std;
-int main()
-{
-   int n;
-   cin>>n;
-   int revenue[n],i,j;
-   for(i=0;i<n;i++)
-   {
-       cin>>revenue[i];
-   }
-   int dp[n+1];
-   dp[0]=0;
-   int ind[n+1];
 
-   for(i=1;i<=n;i++)
-   {
-       int mx = INT_MIN;
-       for (j = 1; j <= i; j++)
-       {
-        if(mx<revenue[j-1]+dp[i-j])
-        {
-            mx=revenue[j-1]+dp[i-j];
-            ind[i]=j;
+void bottomUpCutRod(int *p, int n){
+    int len = n + 1;
+    int r[len];
+    int s[len];
+    r[0] = 0;
+
+    int j, i;
+    for(j = 1; j <= n; j++){
+        int q = INT_MIN;
+        for(i = 1; i <= j; i++) {
+            if(q < p[i - 1] + r[j - i]){
+                q = p[i - 1] + r[j - i];
+                s[j] = i;
+            }
         }
-       }
-       dp[i] = mx;
-   }
-   cout<<dp[n]<<"\n";
+        r[j] = q;
+    }
+    std::cout << r[n];
+    std::cout << endl;
+    while(n > 0){
+        std::cout << s[n];
+        std::cout << " ";
+        n -= s[n];
+    }
+}
+int main(){
+    int n;
+    std::cin >> n;
+    int p[n];
 
-   while(n>0)
-   {
-       cout<<ind[n]<<" ";
-       n=n-ind[n];
-   }
-   cout<<"-1\n";
+    for(int i = 0; i < n; i++){
+        std::cin >> p[i];
+    }
+    bottomUpCutRod(p, n);
+    std::cout << "-1\n";
 }
