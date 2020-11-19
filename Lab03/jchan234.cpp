@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include<climits>
+
 
 //Resources used: Lecture/Book/Lab Session/peer: Alberto V. - helped explain the process of merge sort 
 using namespace std;
