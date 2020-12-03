@@ -1,22 +1,22 @@
 #include <iostream>
-// #include <vector>
-// #include <limits.h>
+#include <vector>
 #include <climits>
-
+//Resources used Book, Lab session
 
 using namespace std;
-
+//Pseudocode pg 377
 void printOptParens(int i, int j, int n, int *brackets, int &current){
     if(i == j) {
         std::cout << "A";
         std::cout << current++;
         return;
-    }
+    } //else statement not needed
     std::cout << "(";
     printOptParens(i, *((brackets + i * n) + j), n, brackets, current);
     printOptParens(*((brackets + i * n) + j) + 1, j, n, brackets, current);
     std::cout << ")";
 }
+//Pseudocode pg 375
 void MCO(int p[], int n){ 
     int m[n][n];
     int s[n][n];
