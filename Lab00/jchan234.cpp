@@ -19,7 +19,7 @@ void insertionSortedFn(int n, int* arr){
         }
         arr[i+1] = key; 
     }
-    for(int k = 0; k < n; k++){
+    for(int k = 0; k < n; k++){ 
         std::cout << arr[k] << ";";
     }
 }
@@ -27,12 +27,10 @@ void insertionSortedFn(int n, int* arr){
 int main() {
     int n;
     std::cin >> n;
-    // cout << n;
+
     int* arr;
     arr = new int[n];
-    // cin >> arr;
-    // cout << arr;
-    // std::cout << "1" << ";"; // checking point
+
     for(int i = 0; i < n; i++){
         std::cin >> arr[i];
     }
